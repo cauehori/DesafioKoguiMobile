@@ -1,0 +1,161 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="KoguiApp.MainPage"
+             xmlns:viewModels="clr-namespace:KoguiApp.ViewModels"
+             Title="Desafio Kogui">
+
+    <ContentPage.BindingContext>
+        <viewModels:MainViewModel/>
+    </ContentPage.BindingContext>
+
+    <VerticalStackLayout Spacing="10" Padding="10">
+
+        <HorizontalStackLayout HorizontalOptions="Center" Spacing="15">
+            <Button Text="Seção 1" Command="{Binding SetSectionCommand}" CommandParameter="1" />
+            <Button Text="Seção 2" Command="{Binding SetSectionCommand}" CommandParameter="2" />
+            <Button Text="Seção 3" Command="{Binding SetSectionCommand}" CommandParameter="3" />
+        </HorizontalStackLayout>
+
+        <BoxView HeightRequest="1" Color="LightGray" />
+
+        <ContentView>
+            <ContentView.Style>
+                <Style TargetType="ContentView">
+                    <Setter Property="IsVisible" Value="False" />
+                    <Style.Triggers>
+                        <DataTrigger TargetType="ContentView" Binding="{Binding SelectedSection}" Value="1">
+                            <Setter Property="IsVisible" Value="True" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </ContentView.Style>
+
+            <VerticalStackLayout>
+
+                <Grid ColumnSpacing="0" BackgroundColor="#8B008B">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Label Text="COR" 
+                   TextColor="White" 
+                   FontAttributes="Bold" 
+                   HorizontalOptions="Center" 
+                   VerticalOptions="Center"
+                   Padding="10"
+                   Grid.Column="0" />
+
+                    <Label Text="COMPONENTE" 
+                   TextColor="White" 
+                   FontAttributes="Bold" 
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"
+                   Padding="10"
+                   Grid.Column="1" />
+                </Grid>
+
+                <CollectionView ItemsSource="{Binding ItensChaveCor}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid ColumnSpacing="0" RowSpacing="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <Label Text="{Binding COR}" 
+                               TextColor="White"
+                               BackgroundColor="#8A2BE2" 
+                               HorizontalOptions="Fill" 
+                               VerticalOptions="Fill"  
+                               HorizontalTextAlignment="Center" 
+                               VerticalTextAlignment="Center"
+                               Padding="8"
+                               Grid.Column="0" />
+
+                                <Label Text="{Binding COMPONENTE}" 
+                               TextColor="White"
+                               BackgroundColor="#FF69B4" 
+                               HorizontalOptions="Fill"
+                               VerticalOptions="Fill"
+                               HorizontalTextAlignment="Center"
+                               VerticalTextAlignment="Center"
+                               Padding="8"
+                               Grid.Column="1" />
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+            </VerticalStackLayout>
+        </ContentView>
+
+        <ContentView>
+            <ContentView.Style>
+                <Style TargetType="ContentView">
+                    <Setter Property="IsVisible" Value="False" />
+                    <Style.Triggers>
+                        <DataTrigger TargetType="ContentView" Binding="{Binding SelectedSection}" Value="2">
+                            <Setter Property="IsVisible" Value="True" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </ContentView.Style>
+
+            <ScrollView>
+                <VerticalStackLayout Spacing="15" Padding="10">
+                <CollectionView ItemsSource="{Binding ApiResults}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Border StrokeShape="RoundRectangle 10" Padding="15" Margin="5" Stroke="LightGray" StrokeThickness="1">
+                                <VerticalStackLayout>
+                                    <Label Text="{Binding NomeCor}" FontSize="Title" />
+                                    <Label Text="{Binding Hexadecimal}" />
+                                </VerticalStackLayout>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+                <Label Text="{Binding FraseResultante}" 
+               HorizontalOptions="Center" 
+               FontSize="Medium" 
+               FontAttributes="Italic" />
+            </VerticalStackLayout>
+            </ScrollView>
+        </ContentView>
+
+        <ContentView>
+            <ContentView.Style>
+                <Style TargetType="ContentView">
+                    <Setter Property="IsVisible" Value="False" />
+                    <Style.Triggers>
+                        <DataTrigger TargetType="ContentView" Binding="{Binding SelectedSection}" Value="3">
+                            <Setter Property="IsVisible" Value="True" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </ContentView.Style>
+
+            <ScrollView>
+                <VerticalStackLayout Spacing="15" Padding="10">
+
+                    <Label Text="{Binding NomeObjeto}"
+                   FontSize="Large"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center" />
+
+                    <Label Text="{Binding FiguraResultante}"
+                   FontFamily="Courier New"
+                   FontSize="Small"
+                   HorizontalOptions="Center"
+                   LineBreakMode="CharacterWrap" />
+
+                </VerticalStackLayout>
+            </ScrollView>
+        </ContentView>
+
+    </VerticalStackLayout>
+</ContentPage>
